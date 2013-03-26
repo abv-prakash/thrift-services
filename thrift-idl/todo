@@ -1,0 +1,2 @@
+1. make http web client (servlet) without Guice .
+2. integrate (1) with Guice 
