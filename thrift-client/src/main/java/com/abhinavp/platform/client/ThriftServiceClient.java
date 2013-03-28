@@ -21,7 +21,7 @@ public class ThriftServiceClient implements UserService.Iface
     {
         try
         {
-            THttpClient tClient = new THttpClient("http://" + "localhost:8080" + "/userservice");
+            THttpClient tClient = new THttpClient("http://" + "localhost:8080" + "/rest-api/userservice");
             return new UserService.Client(new TBinaryProtocol(tClient));
         }
         catch (TTransportException e)
@@ -49,4 +49,23 @@ public class ThriftServiceClient implements UserService.Iface
         return null;
     }
 
+    public static void main(final String args[])
+    {
+        ThriftServiceClient client = new ThriftServiceClient();
+        TUser user = new TUser();
+
+        user.setAccount("abhinav_account");
+        user.setActive(true);
+        try
+        {
+            TResult result = client.addUser(user);
+            System.out.println(result.toString());
+        }
+        catch (TException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
 }
